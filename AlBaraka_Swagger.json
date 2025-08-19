@@ -26,29 +26,9 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/HealthResponse"
-            },
-            "examples": {
-              "application/json": {
-                "ok": true
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Error"
             }
           }
-        },
-        "tags": [
-          "Health"
-        ]
+        }
       }
     },
     "/core/customers": {
@@ -70,24 +50,12 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/CustomerOut"
-            },
-            "examples": {
-              "application/json": {}
             }
           },
           "400": {
             "description": "Bad Request"
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
           }
-        },
-        "tags": [
-          "Core"
-        ]
+        }
       },
       "get": {
         "summary": "List customers",
@@ -114,33 +82,10 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CustomerOut"
-              }
-            },
-            "examples": {
-              "application/json": [
-                {}
-              ]
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/CustomerOutList"
             }
           }
-        },
-        "tags": [
-          "Core"
-        ]
+        }
       }
     },
     "/core/customers/{cif}": {
@@ -161,30 +106,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/CustomerOut"
-            },
-            "examples": {
-              "application/json": {}
             }
           },
           "404": {
             "description": "Not Found"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
           }
-        },
-        "tags": [
-          "Core"
-        ]
+        }
       },
       "patch": {
         "summary": "Update customer",
@@ -211,9 +138,6 @@
             "description": "Updated",
             "schema": {
               "$ref": "#/definitions/CustomerOut"
-            },
-            "examples": {
-              "application/json": {}
             }
           },
           "400": {
@@ -221,17 +145,8 @@
           },
           "404": {
             "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
           }
-        },
-        "tags": [
-          "Core"
-        ]
+        }
       },
       "delete": {
         "summary": "Delete customer",
@@ -251,23 +166,8 @@
           },
           "404": {
             "description": "Not Found"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
           }
-        },
-        "tags": [
-          "Core"
-        ]
+        }
       }
     },
     "/core/customers/by-national-id/{national_id}": {
@@ -287,30 +187,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/CustomerOut"
-            },
-            "examples": {
-              "application/json": {}
             }
           },
           "404": {
             "description": "Not Found"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
           }
-        },
-        "tags": [
-          "Core"
-        ]
+        }
       }
     },
     "/core/customers/createCIF": {
@@ -332,26 +214,12 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/CreateCIFResponse"
-            },
-            "examples": {
-              "application/json": {
-                "CIF": 0
-              }
             }
           },
           "400": {
             "description": "Bad Request"
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
           }
-        },
-        "tags": [
-          "Core"
-        ]
+        }
       }
     },
     "/core/accounts": {
@@ -373,24 +241,12 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/AccountOut"
-            },
-            "examples": {
-              "application/json": {}
             }
           },
           "400": {
             "description": "Bad Request"
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
           }
-        },
-        "tags": [
-          "Core"
-        ]
+        }
       },
       "get": {
         "summary": "List accounts",
@@ -418,33 +274,10 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/AccountOut"
-              }
-            },
-            "examples": {
-              "application/json": [
-                {}
-              ]
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/AccountOutList"
             }
           }
-        },
-        "tags": [
-          "Core"
-        ]
+        }
       }
     },
     "/core/accounts/createAccount": {
@@ -466,26 +299,12 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/CreateAccountResponse"
-            },
-            "examples": {
-              "application/json": {
-                "AccountNumber": ""
-              }
             }
           },
           "400": {
             "description": "Bad Request"
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
           }
-        },
-        "tags": [
-          "Core"
-        ]
+        }
       }
     },
     "/core/accounts/{account_number}": {
@@ -505,30 +324,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/AccountOut"
-            },
-            "examples": {
-              "application/json": {}
             }
           },
           "404": {
             "description": "Not Found"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
           }
-        },
-        "tags": [
-          "Core"
-        ]
+        }
       },
       "patch": {
         "summary": "Update account",
@@ -554,9 +355,6 @@
             "description": "Updated",
             "schema": {
               "$ref": "#/definitions/AccountOut"
-            },
-            "examples": {
-              "application/json": {}
             }
           },
           "400": {
@@ -564,17 +362,8 @@
           },
           "404": {
             "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
           }
-        },
-        "tags": [
-          "Core"
-        ]
+        }
       },
       "delete": {
         "summary": "Delete account",
@@ -593,23 +382,8 @@
           },
           "404": {
             "description": "Not Found"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
           }
-        },
-        "tags": [
-          "Core"
-        ]
+        }
       }
     },
     "/ecm/folders": {
@@ -631,24 +405,12 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/FolderOut"
-            },
-            "examples": {
-              "application/json": {}
             }
           },
           "400": {
             "description": "Bad Request"
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
           }
-        },
-        "tags": [
-          "Ecm"
-        ]
+        }
       },
       "get": {
         "summary": "List ECM folders",
@@ -682,33 +444,10 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/FolderOut"
-              }
-            },
-            "examples": {
-              "application/json": [
-                {}
-              ]
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/FolderOutList"
             }
           }
-        },
-        "tags": [
-          "Ecm"
-        ]
+        }
       }
     },
     "/ecm/folders/{folder_id}": {
@@ -729,30 +468,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/FolderOut"
-            },
-            "examples": {
-              "application/json": {}
             }
           },
           "404": {
             "description": "Not Found"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
           }
-        },
-        "tags": [
-          "Ecm"
-        ]
+        }
       },
       "patch": {
         "summary": "Update ECM folder",
@@ -779,30 +500,12 @@
             "description": "Updated",
             "schema": {
               "$ref": "#/definitions/FolderOut"
-            },
-            "examples": {
-              "application/json": {}
             }
           },
           "404": {
             "description": "Not Found"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
           }
-        },
-        "tags": [
-          "Ecm"
-        ]
+        }
       },
       "delete": {
         "summary": "Delete ECM folder",
@@ -822,23 +525,8 @@
           },
           "404": {
             "description": "Not Found"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
           }
-        },
-        "tags": [
-          "Ecm"
-        ]
+        }
       }
     },
     "/ecm/folders/by-cif/{cif}": {
@@ -859,30 +547,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/FolderOut"
-            },
-            "examples": {
-              "application/json": {}
             }
           },
           "404": {
             "description": "Not Found"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
           }
-        },
-        "tags": [
-          "Ecm"
-        ]
+        }
       }
     },
     "/ecm/documents": {
@@ -904,24 +574,12 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/DocumentOut"
-            },
-            "examples": {
-              "application/json": {}
             }
           },
           "400": {
             "description": "Bad Request"
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
           }
-        },
-        "tags": [
-          "Ecm"
-        ]
+        }
       },
       "get": {
         "summary": "List ECM documents",
@@ -961,33 +619,10 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/DocumentOut"
-              }
-            },
-            "examples": {
-              "application/json": [
-                {}
-              ]
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/DocumentOutList"
             }
           }
-        },
-        "tags": [
-          "Ecm"
-        ]
+        }
       }
     },
     "/ecm/documents/by-folder-request": {
@@ -1014,30 +649,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/DocumentOut"
-            },
-            "examples": {
-              "application/json": {}
             }
           },
           "404": {
             "description": "Not Found"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
           }
-        },
-        "tags": [
-          "Ecm"
-        ]
+        }
       }
     },
     "/ecm/documents/{document_id}": {
@@ -1058,30 +675,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/DocumentOut"
-            },
-            "examples": {
-              "application/json": {}
             }
           },
           "404": {
             "description": "Not Found"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
           }
-        },
-        "tags": [
-          "Ecm"
-        ]
+        }
       },
       "patch": {
         "summary": "Update ECM document",
@@ -1108,30 +707,12 @@
             "description": "Updated",
             "schema": {
               "$ref": "#/definitions/DocumentOut"
-            },
-            "examples": {
-              "application/json": {}
             }
           },
           "404": {
             "description": "Not Found"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
           }
-        },
-        "tags": [
-          "Ecm"
-        ]
+        }
       },
       "delete": {
         "summary": "Delete ECM document",
@@ -1151,23 +732,8 @@
           },
           "404": {
             "description": "Not Found"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
           }
-        },
-        "tags": [
-          "Ecm"
-        ]
+        }
       }
     },
     "/aml/screenings": {
@@ -1189,24 +755,12 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/ScreeningOut"
-            },
-            "examples": {
-              "application/json": {}
             }
           },
           "400": {
             "description": "Bad Request"
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
           }
-        },
-        "tags": [
-          "Aml"
-        ]
+        }
       },
       "get": {
         "summary": "List screenings",
@@ -1250,33 +804,10 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ScreeningOut"
-              }
-            },
-            "examples": {
-              "application/json": [
-                {}
-              ]
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ScreeningOutList"
             }
           }
-        },
-        "tags": [
-          "Aml"
-        ]
+        }
       }
     },
     "/aml/screenings/{screening_id}": {
@@ -1297,30 +828,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/ScreeningOut"
-            },
-            "examples": {
-              "application/json": {}
             }
           },
           "404": {
             "description": "Not Found"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
           }
-        },
-        "tags": [
-          "Aml"
-        ]
+        }
       },
       "patch": {
         "summary": "Update screening",
@@ -1347,9 +860,6 @@
             "description": "Updated",
             "schema": {
               "$ref": "#/definitions/ScreeningOut"
-            },
-            "examples": {
-              "application/json": {}
             }
           },
           "400": {
@@ -1357,17 +867,8 @@
           },
           "404": {
             "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
           }
-        },
-        "tags": [
-          "Aml"
-        ]
+        }
       },
       "delete": {
         "summary": "Delete screening",
@@ -1387,23 +888,8 @@
           },
           "404": {
             "description": "Not Found"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
           }
-        },
-        "tags": [
-          "Aml"
-        ]
+        }
       }
     },
     "/aml/screenings/by-national-id/{national_id}": {
@@ -1423,30 +909,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/ScreeningOut"
-            },
-            "examples": {
-              "application/json": {}
             }
           },
           "404": {
             "description": "Not Found"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
           }
-        },
-        "tags": [
-          "Aml"
-        ]
+        }
       }
     }
   },
@@ -1582,27 +1050,69 @@
       }
     },
     "CustomerOut": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/CustomerCreate"
+      "type": "object",
+      "properties": {
+        "NationalID": {
+          "type": "string",
+          "minLength": 14,
+          "maxLength": 14
         },
-        {
-          "type": "object",
-          "properties": {
-            "CIF": {
-              "type": "integer",
-              "format": "int64"
-            },
-            "CreatedAt": {
-              "type": "string",
-              "format": "date-time"
-            }
-          },
-          "required": [
-            "CIF",
-            "CreatedAt"
+        "PassportNo": {
+          "type": "string"
+        },
+        "NameAr": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "NameEn": {
+          "type": "string"
+        },
+        "DOB": {
+          "type": "string",
+          "format": "date"
+        },
+        "Gender": {
+          "type": "string",
+          "enum": [
+            "M",
+            "F"
           ]
+        },
+        "Address": {
+          "type": "string"
+        },
+        "Mobile": {
+          "type": "string",
+          "minLength": 4,
+          "maxLength": 20
+        },
+        "Email": {
+          "type": "string",
+          "format": "email"
+        },
+        "BranchCode": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 10
+        },
+        "CIF": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "CreatedAt": {
+          "type": "string",
+          "format": "date-time"
         }
+      },
+      "required": [
+        "BranchCode",
+        "CIF",
+        "CreatedAt",
+        "DOB",
+        "Gender",
+        "Mobile",
+        "NameAr"
       ]
     },
     "AccountCreateLocked": {
@@ -1695,22 +1205,45 @@
       }
     },
     "AccountOut": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/AccountCreate"
+      "type": "object",
+      "properties": {
+        "AccountNumber": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 20
         },
-        {
-          "type": "object",
-          "properties": {
-            "CreatedAt": {
-              "type": "string",
-              "format": "date-time"
-            }
-          },
-          "required": [
-            "CreatedAt"
-          ]
+        "CIF": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "AccountType": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 30
+        },
+        "Currency": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 3
+        },
+        "DebitBlocked": {
+          "type": "boolean",
+          "default": false
+        },
+        "ProductCode": {
+          "type": "string"
+        },
+        "CreatedAt": {
+          "type": "string",
+          "format": "date-time"
         }
+      },
+      "required": [
+        "AccountNumber",
+        "AccountType",
+        "CIF",
+        "CreatedAt",
+        "Currency"
       ]
     },
     "FolderCreate": {
@@ -1745,27 +1278,35 @@
       }
     },
     "FolderOut": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/FolderCreate"
+      "type": "object",
+      "properties": {
+        "CIF": {
+          "type": "integer",
+          "format": "int64"
         },
-        {
-          "type": "object",
-          "properties": {
-            "FolderId": {
-              "type": "string",
-              "format": "uuid"
-            },
-            "CreatedAt": {
-              "type": "string",
-              "format": "date-time"
-            }
-          },
-          "required": [
-            "FolderId",
-            "CreatedAt"
-          ]
+        "RequestId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "PathHint": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "FolderId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "CreatedAt": {
+          "type": "string",
+          "format": "date-time"
         }
+      },
+      "required": [
+        "CIF",
+        "CreatedAt",
+        "FolderId",
+        "RequestId"
       ]
     },
     "DocumentCreate": {
@@ -1810,27 +1351,43 @@
       }
     },
     "DocumentOut": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DocumentCreate"
+      "type": "object",
+      "properties": {
+        "FolderId": {
+          "type": "string",
+          "format": "uuid"
         },
-        {
-          "type": "object",
-          "properties": {
-            "DocumentId": {
-              "type": "string",
-              "format": "uuid"
-            },
-            "UploadedAt": {
-              "type": "string",
-              "format": "date-time"
-            }
-          },
-          "required": [
-            "DocumentId",
-            "UploadedAt"
-          ]
+        "RequestId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "DocType": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "FileName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "DocumentId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "UploadedAt": {
+          "type": "string",
+          "format": "date-time"
         }
+      },
+      "required": [
+        "DocType",
+        "DocumentId",
+        "FileName",
+        "FolderId",
+        "RequestId",
+        "UploadedAt"
       ]
     },
     "ScreeningCreate": {
@@ -1909,68 +1466,129 @@
       }
     },
     "ScreeningOut": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/ScreeningCreate"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "ScreeningId": {
-              "type": "string",
-              "format": "uuid"
-            },
-            "PerformedAt": {
-              "type": "string",
-              "format": "date-time"
-            }
-          },
-          "required": [
-            "ScreeningId",
-            "PerformedAt"
-          ]
-        }
-      ]
-    },
-    "Error": {
       "type": "object",
-      "required": [
-        "code",
-        "message"
-      ],
       "properties": {
-        "code": {
+        "NationalID": {
+          "type": "string",
+          "minLength": 14,
+          "maxLength": 14
+        },
+        "PassportNo": {
+          "type": "string"
+        },
+        "NameAr": {
+          "type": "string"
+        },
+        "NameEn": {
+          "type": "string"
+        },
+        "RiskScore": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "RiskLevel": {
+          "type": "string",
+          "enum": [
+            "LOW",
+            "MEDIUM",
+            "HIGH"
+          ]
+        },
+        "HitsCount": {
           "type": "integer",
           "format": "int32",
-          "example": 400
+          "default": 0
         },
-        "message": {
+        "ScreeningId": {
           "type": "string",
-          "example": "Invalid request"
+          "format": "uuid"
         },
-        "details": {
+        "PerformedAt": {
           "type": "string",
-          "example": "Field 'name' is required."
+          "format": "date-time"
         }
-      }
+      },
+      "required": [
+        "PerformedAt",
+        "RiskLevel",
+        "RiskScore",
+        "ScreeningId"
+      ]
+    },
+    "CustomerOutList": {
+      "type": "object",
+      "description": "List wrapper for CustomerOut items (K2-friendly).",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomerOut"
+          }
+        }
+      },
+      "required": [
+        "items"
+      ]
+    },
+    "AccountOutList": {
+      "type": "object",
+      "description": "List wrapper for AccountOut items (K2-friendly).",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccountOut"
+          }
+        }
+      },
+      "required": [
+        "items"
+      ]
+    },
+    "FolderOutList": {
+      "type": "object",
+      "description": "List wrapper for FolderOut items (K2-friendly).",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FolderOut"
+          }
+        }
+      },
+      "required": [
+        "items"
+      ]
+    },
+    "DocumentOutList": {
+      "type": "object",
+      "description": "List wrapper for DocumentOut items (K2-friendly).",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DocumentOut"
+          }
+        }
+      },
+      "required": [
+        "items"
+      ]
+    },
+    "ScreeningOutList": {
+      "type": "object",
+      "description": "List wrapper for ScreeningOut items (K2-friendly).",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScreeningOut"
+          }
+        }
+      },
+      "required": [
+        "items"
+      ]
     }
-  },
-  "tags": [
-    {
-      "name": "Health",
-      "description": "Operations related to Health."
-    },
-    {
-      "name": "Core",
-      "description": "Operations related to Core."
-    },
-    {
-      "name": "Ecm",
-      "description": "Operations related to Ecm."
-    },
-    {
-      "name": "Aml",
-      "description": "Operations related to Aml."
-    }
-  ]
+  }
 }
