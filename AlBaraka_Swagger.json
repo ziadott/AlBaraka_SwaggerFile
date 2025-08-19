@@ -7,10 +7,15 @@
   },
   "host": "core-ecm-aml-api.onrender.com",
   "basePath": "/",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
-
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
     "/health": {
       "get": {
@@ -19,659 +24,1953 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/HealthResponse" }
+            "schema": {
+              "$ref": "#/definitions/HealthResponse"
+            },
+            "examples": {
+              "application/json": {
+                "ok": true
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
-        }
+        },
+        "tags": [
+          "Health"
+        ]
       }
     },
-
     "/core/customers": {
       "post": {
         "summary": "Create customer",
         "operationId": "createCustomer",
         "parameters": [
-          { "in": "body", "name": "body", "required": true, "schema": { "$ref": "#/definitions/CustomerCreate" } }
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomerCreate"
+            }
+          }
         ],
         "responses": {
-          "201": { "description": "Created", "schema": { "$ref": "#/definitions/CustomerOut" } },
-          "400": { "description": "Bad Request" }
-        }
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/CustomerOut"
+            },
+            "examples": {
+              "application/json": {}
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "tags": [
+          "Core"
+        ]
       },
       "get": {
         "summary": "List customers",
         "operationId": "listCustomers",
         "parameters": [
-          { "in": "query", "name": "branch", "type": "string", "required": false },
-          { "in": "query", "name": "limit", "type": "integer", "format": "int32", "minimum": 1, "maximum": 500, "default": 50, "required": false }
+          {
+            "in": "query",
+            "name": "branch",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 500,
+            "default": 50,
+            "required": false
+          }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "type": "array", "items": { "$ref": "#/definitions/CustomerOut" } }
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CustomerOut"
+              }
+            },
+            "examples": {
+              "application/json": [
+                {}
+              ]
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
-        }
+        },
+        "tags": [
+          "Core"
+        ]
       }
     },
-
     "/core/customers/{cif}": {
       "get": {
         "summary": "Get customer by CIF",
         "operationId": "getCustomer",
         "parameters": [
-          { "in": "path", "name": "cif", "type": "integer", "format": "int64", "required": true }
+          {
+            "in": "path",
+            "name": "cif",
+            "type": "integer",
+            "format": "int64",
+            "required": true
+          }
         ],
         "responses": {
-          "200": { "description": "OK", "schema": { "$ref": "#/definitions/CustomerOut" } },
-          "404": { "description": "Not Found" }
-        }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CustomerOut"
+            },
+            "examples": {
+              "application/json": {}
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "tags": [
+          "Core"
+        ]
       },
       "patch": {
         "summary": "Update customer",
         "operationId": "updateCustomer",
         "parameters": [
-          { "in": "path", "name": "cif", "type": "integer", "format": "int64", "required": true },
-          { "in": "body", "name": "body", "required": true, "schema": { "$ref": "#/definitions/CustomerUpdate" } }
+          {
+            "in": "path",
+            "name": "cif",
+            "type": "integer",
+            "format": "int64",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomerUpdate"
+            }
+          }
         ],
         "responses": {
-          "200": { "description": "Updated", "schema": { "$ref": "#/definitions/CustomerOut" } },
-          "400": { "description": "Bad Request" },
-          "404": { "description": "Not Found" }
-        }
+          "200": {
+            "description": "Updated",
+            "schema": {
+              "$ref": "#/definitions/CustomerOut"
+            },
+            "examples": {
+              "application/json": {}
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "tags": [
+          "Core"
+        ]
       },
       "delete": {
         "summary": "Delete customer",
         "operationId": "deleteCustomer",
         "parameters": [
-          { "in": "path", "name": "cif", "type": "integer", "format": "int64", "required": true }
+          {
+            "in": "path",
+            "name": "cif",
+            "type": "integer",
+            "format": "int64",
+            "required": true
+          }
         ],
         "responses": {
-          "204": { "description": "Deleted" },
-          "404": { "description": "Not Found" }
-        }
+          "204": {
+            "description": "Deleted"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "tags": [
+          "Core"
+        ]
       }
     },
-
     "/core/customers/by-national-id/{national_id}": {
       "get": {
         "summary": "Get customer by National ID",
         "operationId": "getCustomerByNationalId",
         "parameters": [
-          { "in": "path", "name": "national_id", "type": "string", "required": true }
+          {
+            "in": "path",
+            "name": "national_id",
+            "type": "string",
+            "required": true
+          }
         ],
         "responses": {
-          "200": { "description": "OK", "schema": { "$ref": "#/definitions/CustomerOut" } },
-          "404": { "description": "Not Found" }
-        }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CustomerOut"
+            },
+            "examples": {
+              "application/json": {}
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "tags": [
+          "Core"
+        ]
       }
     },
-
     "/core/customers/createCIF": {
       "post": {
         "summary": "Create customer and return CIF only",
         "operationId": "createCIF",
         "parameters": [
-          { "in": "body", "name": "body", "required": true, "schema": { "$ref": "#/definitions/CustomerCreate" } }
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomerCreate"
+            }
+          }
         ],
         "responses": {
-          "201": { "description": "Created", "schema": { "$ref": "#/definitions/CreateCIFResponse" } },
-          "400": { "description": "Bad Request" }
-        }
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/CreateCIFResponse"
+            },
+            "examples": {
+              "application/json": {
+                "CIF": 0
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "tags": [
+          "Core"
+        ]
       }
     },
-
     "/core/accounts": {
       "post": {
         "summary": "Create account (general)",
         "operationId": "createAccount",
         "parameters": [
-          { "in": "body", "name": "body", "required": true, "schema": { "$ref": "#/definitions/AccountCreate" } }
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountCreate"
+            }
+          }
         ],
         "responses": {
-          "201": { "description": "Created", "schema": { "$ref": "#/definitions/AccountOut" } },
-          "400": { "description": "Bad Request" }
-        }
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/AccountOut"
+            },
+            "examples": {
+              "application/json": {}
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "tags": [
+          "Core"
+        ]
       },
       "get": {
         "summary": "List accounts",
         "operationId": "listAccounts",
         "parameters": [
-          { "in": "query", "name": "cif", "type": "integer", "format": "int64", "required": false },
-          { "in": "query", "name": "limit", "type": "integer", "format": "int32", "minimum": 1, "maximum": 500, "default": 50, "required": false }
+          {
+            "in": "query",
+            "name": "cif",
+            "type": "integer",
+            "format": "int64",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 500,
+            "default": 50,
+            "required": false
+          }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "type": "array", "items": { "$ref": "#/definitions/AccountOut" } }
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AccountOut"
+              }
+            },
+            "examples": {
+              "application/json": [
+                {}
+              ]
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
-        }
+        },
+        "tags": [
+          "Core"
+        ]
       }
     },
-
     "/core/accounts/createAccount": {
       "post": {
         "summary": "Create account (DebitBlocked forced TRUE)",
         "operationId": "createAccountLocked",
         "parameters": [
-          { "in": "body", "name": "body", "required": true, "schema": { "$ref": "#/definitions/AccountCreateLocked" } }
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountCreateLocked"
+            }
+          }
         ],
         "responses": {
-          "201": { "description": "Created", "schema": { "$ref": "#/definitions/CreateAccountResponse" } },
-          "400": { "description": "Bad Request" }
-        }
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/CreateAccountResponse"
+            },
+            "examples": {
+              "application/json": {
+                "AccountNumber": ""
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "tags": [
+          "Core"
+        ]
       }
     },
-
     "/core/accounts/{account_number}": {
       "get": {
         "summary": "Get account by AccountNumber",
         "operationId": "getAccount",
         "parameters": [
-          { "in": "path", "name": "account_number", "type": "string", "required": true }
+          {
+            "in": "path",
+            "name": "account_number",
+            "type": "string",
+            "required": true
+          }
         ],
         "responses": {
-          "200": { "description": "OK", "schema": { "$ref": "#/definitions/AccountOut" } },
-          "404": { "description": "Not Found" }
-        }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccountOut"
+            },
+            "examples": {
+              "application/json": {}
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "tags": [
+          "Core"
+        ]
       },
       "patch": {
         "summary": "Update account",
         "operationId": "updateAccount",
         "parameters": [
-          { "in": "path", "name": "account_number", "type": "string", "required": true },
-          { "in": "body", "name": "body", "required": true, "schema": { "$ref": "#/definitions/AccountUpdate" } }
+          {
+            "in": "path",
+            "name": "account_number",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountUpdate"
+            }
+          }
         ],
         "responses": {
-          "200": { "description": "Updated", "schema": { "$ref": "#/definitions/AccountOut" } },
-          "400": { "description": "Bad Request" },
-          "404": { "description": "Not Found" }
-        }
+          "200": {
+            "description": "Updated",
+            "schema": {
+              "$ref": "#/definitions/AccountOut"
+            },
+            "examples": {
+              "application/json": {}
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "tags": [
+          "Core"
+        ]
       },
       "delete": {
         "summary": "Delete account",
         "operationId": "deleteAccount",
         "parameters": [
-          { "in": "path", "name": "account_number", "type": "string", "required": true }
+          {
+            "in": "path",
+            "name": "account_number",
+            "type": "string",
+            "required": true
+          }
         ],
         "responses": {
-          "204": { "description": "Deleted" },
-          "404": { "description": "Not Found" }
-        }
+          "204": {
+            "description": "Deleted"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "tags": [
+          "Core"
+        ]
       }
     },
-
     "/ecm/folders": {
       "post": {
         "summary": "Create ECM folder",
         "operationId": "createFolder",
         "parameters": [
-          { "in": "body", "name": "body", "required": true, "schema": { "$ref": "#/definitions/FolderCreate" } }
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FolderCreate"
+            }
+          }
         ],
         "responses": {
-          "201": { "description": "Created", "schema": { "$ref": "#/definitions/FolderOut" } },
-          "400": { "description": "Bad Request" }
-        }
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/FolderOut"
+            },
+            "examples": {
+              "application/json": {}
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "tags": [
+          "Ecm"
+        ]
       },
       "get": {
         "summary": "List ECM folders",
         "operationId": "listFolders",
         "parameters": [
-          { "in": "query", "name": "cif", "type": "integer", "format": "int64", "required": false },
-          { "in": "query", "name": "request_id", "type": "string", "required": false },
-          { "in": "query", "name": "limit", "type": "integer", "format": "int32", "minimum": 1, "maximum": 500, "default": 50, "required": false }
+          {
+            "in": "query",
+            "name": "cif",
+            "type": "integer",
+            "format": "int64",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "request_id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 500,
+            "default": 50,
+            "required": false
+          }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "type": "array", "items": { "$ref": "#/definitions/FolderOut" } }
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FolderOut"
+              }
+            },
+            "examples": {
+              "application/json": [
+                {}
+              ]
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
-        }
+        },
+        "tags": [
+          "Ecm"
+        ]
       }
     },
-
     "/ecm/folders/{folder_id}": {
       "get": {
         "summary": "Get ECM folder by FolderId",
         "operationId": "getFolder",
         "parameters": [
-          { "in": "path", "name": "folder_id", "type": "string", "format": "uuid", "required": true }
+          {
+            "in": "path",
+            "name": "folder_id",
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          }
         ],
         "responses": {
-          "200": { "description": "OK", "schema": { "$ref": "#/definitions/FolderOut" } },
-          "404": { "description": "Not Found" }
-        }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FolderOut"
+            },
+            "examples": {
+              "application/json": {}
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "tags": [
+          "Ecm"
+        ]
       },
       "patch": {
         "summary": "Update ECM folder",
         "operationId": "updateFolder",
         "parameters": [
-          { "in": "path", "name": "folder_id", "type": "string", "format": "uuid", "required": true },
-          { "in": "body", "name": "body", "required": true, "schema": { "$ref": "#/definitions/FolderUpdate" } }
+          {
+            "in": "path",
+            "name": "folder_id",
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FolderUpdate"
+            }
+          }
         ],
         "responses": {
-          "200": { "description": "Updated", "schema": { "$ref": "#/definitions/FolderOut" } },
-          "404": { "description": "Not Found" }
-        }
+          "200": {
+            "description": "Updated",
+            "schema": {
+              "$ref": "#/definitions/FolderOut"
+            },
+            "examples": {
+              "application/json": {}
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "tags": [
+          "Ecm"
+        ]
       },
       "delete": {
         "summary": "Delete ECM folder",
         "operationId": "deleteFolder",
         "parameters": [
-          { "in": "path", "name": "folder_id", "type": "string", "format": "uuid", "required": true }
+          {
+            "in": "path",
+            "name": "folder_id",
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          }
         ],
         "responses": {
-          "204": { "description": "Deleted" },
-          "404": { "description": "Not Found" }
-        }
+          "204": {
+            "description": "Deleted"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "tags": [
+          "Ecm"
+        ]
       }
     },
-
     "/ecm/folders/by-cif/{cif}": {
       "get": {
         "summary": "Get ECM folder by CIF (latest)",
         "operationId": "getFolderByCif",
         "parameters": [
-          { "in": "path", "name": "cif", "type": "integer", "format": "int64", "required": true }
+          {
+            "in": "path",
+            "name": "cif",
+            "type": "integer",
+            "format": "int64",
+            "required": true
+          }
         ],
         "responses": {
-          "200": { "description": "OK", "schema": { "$ref": "#/definitions/FolderOut" } },
-          "404": { "description": "Not Found" }
-        }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FolderOut"
+            },
+            "examples": {
+              "application/json": {}
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "tags": [
+          "Ecm"
+        ]
       }
     },
-
     "/ecm/documents": {
       "post": {
         "summary": "Create ECM document",
         "operationId": "createDocument",
         "parameters": [
-          { "in": "body", "name": "body", "required": true, "schema": { "$ref": "#/definitions/DocumentCreate" } }
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DocumentCreate"
+            }
+          }
         ],
         "responses": {
-          "201": { "description": "Created", "schema": { "$ref": "#/definitions/DocumentOut" } },
-          "400": { "description": "Bad Request" }
-        }
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/DocumentOut"
+            },
+            "examples": {
+              "application/json": {}
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "tags": [
+          "Ecm"
+        ]
       },
       "get": {
         "summary": "List ECM documents",
         "operationId": "listDocuments",
         "parameters": [
-          { "in": "query", "name": "folder_id", "type": "string", "format": "uuid", "required": false },
-          { "in": "query", "name": "request_id", "type": "string", "required": false },
-          { "in": "query", "name": "doc_type", "type": "string", "required": false },
-          { "in": "query", "name": "limit", "type": "integer", "format": "int32", "minimum": 1, "maximum": 500, "default": 50, "required": false }
+          {
+            "in": "query",
+            "name": "folder_id",
+            "type": "string",
+            "format": "uuid",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "request_id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "doc_type",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 500,
+            "default": 50,
+            "required": false
+          }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "type": "array", "items": { "$ref": "#/definitions/DocumentOut" } }
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DocumentOut"
+              }
+            },
+            "examples": {
+              "application/json": [
+                {}
+              ]
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
-        }
+        },
+        "tags": [
+          "Ecm"
+        ]
       }
     },
-
     "/ecm/documents/by-folder-request": {
       "get": {
         "summary": "Get ECM document by (FolderId, RequestId) — latest",
         "operationId": "getDocByFolderIdRequestId",
         "parameters": [
-          { "in": "query", "name": "folder_id", "type": "string", "format": "uuid", "required": true },
-          { "in": "query", "name": "request_id", "type": "string", "required": true }
+          {
+            "in": "query",
+            "name": "folder_id",
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "request_id",
+            "type": "string",
+            "required": true
+          }
         ],
         "responses": {
-          "200": { "description": "OK", "schema": { "$ref": "#/definitions/DocumentOut" } },
-          "404": { "description": "Not Found" }
-        }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DocumentOut"
+            },
+            "examples": {
+              "application/json": {}
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "tags": [
+          "Ecm"
+        ]
       }
     },
-
     "/ecm/documents/{document_id}": {
       "get": {
         "summary": "Get ECM document by DocumentId",
         "operationId": "getDocument",
         "parameters": [
-          { "in": "path", "name": "document_id", "type": "string", "format": "uuid", "required": true }
+          {
+            "in": "path",
+            "name": "document_id",
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          }
         ],
         "responses": {
-          "200": { "description": "OK", "schema": { "$ref": "#/definitions/DocumentOut" } },
-          "404": { "description": "Not Found" }
-        }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DocumentOut"
+            },
+            "examples": {
+              "application/json": {}
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "tags": [
+          "Ecm"
+        ]
       },
       "patch": {
         "summary": "Update ECM document",
         "operationId": "updateDocument",
         "parameters": [
-          { "in": "path", "name": "document_id", "type": "string", "format": "uuid", "required": true },
-          { "in": "body", "name": "body", "required": true, "schema": { "$ref": "#/definitions/DocumentUpdate" } }
+          {
+            "in": "path",
+            "name": "document_id",
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DocumentUpdate"
+            }
+          }
         ],
         "responses": {
-          "200": { "description": "Updated", "schema": { "$ref": "#/definitions/DocumentOut" } },
-          "404": { "description": "Not Found" }
-        }
+          "200": {
+            "description": "Updated",
+            "schema": {
+              "$ref": "#/definitions/DocumentOut"
+            },
+            "examples": {
+              "application/json": {}
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "tags": [
+          "Ecm"
+        ]
       },
       "delete": {
         "summary": "Delete ECM document",
         "operationId": "deleteDocument",
         "parameters": [
-          { "in": "path", "name": "document_id", "type": "string", "format": "uuid", "required": true }
+          {
+            "in": "path",
+            "name": "document_id",
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          }
         ],
         "responses": {
-          "204": { "description": "Deleted" },
-          "404": { "description": "Not Found" }
-        }
+          "204": {
+            "description": "Deleted"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "tags": [
+          "Ecm"
+        ]
       }
     },
-
     "/aml/screenings": {
       "post": {
         "summary": "Create screening",
         "operationId": "createScreening",
         "parameters": [
-          { "in": "body", "name": "body", "required": true, "schema": { "$ref": "#/definitions/ScreeningCreate" } }
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScreeningCreate"
+            }
+          }
         ],
         "responses": {
-          "201": { "description": "Created", "schema": { "$ref": "#/definitions/ScreeningOut" } },
-          "400": { "description": "Bad Request" }
-        }
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ScreeningOut"
+            },
+            "examples": {
+              "application/json": {}
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "tags": [
+          "Aml"
+        ]
       },
       "get": {
         "summary": "List screenings",
         "operationId": "listScreenings",
         "parameters": [
-          { "in": "query", "name": "national_id", "type": "string", "required": false },
-          { "in": "query", "name": "passport_no", "type": "string", "required": false },
+          {
+            "in": "query",
+            "name": "national_id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "passport_no",
+            "type": "string",
+            "required": false
+          },
           {
             "in": "query",
             "name": "risk_level",
             "type": "string",
             "required": false,
-            "enum": ["LOW", "MEDIUM", "HIGH"]
+            "enum": [
+              "LOW",
+              "MEDIUM",
+              "HIGH"
+            ]
           },
-          { "in": "query", "name": "limit", "type": "integer", "format": "int32", "minimum": 1, "maximum": 500, "default": 50, "required": false }
+          {
+            "in": "query",
+            "name": "limit",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 500,
+            "default": 50,
+            "required": false
+          }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "type": "array", "items": { "$ref": "#/definitions/ScreeningOut" } }
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ScreeningOut"
+              }
+            },
+            "examples": {
+              "application/json": [
+                {}
+              ]
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
-        }
+        },
+        "tags": [
+          "Aml"
+        ]
       }
     },
-
     "/aml/screenings/{screening_id}": {
       "get": {
         "summary": "Get screening by ScreeningId",
         "operationId": "getScreening",
         "parameters": [
-          { "in": "path", "name": "screening_id", "type": "string", "format": "uuid", "required": true }
+          {
+            "in": "path",
+            "name": "screening_id",
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          }
         ],
         "responses": {
-          "200": { "description": "OK", "schema": { "$ref": "#/definitions/ScreeningOut" } },
-          "404": { "description": "Not Found" }
-        }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ScreeningOut"
+            },
+            "examples": {
+              "application/json": {}
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "tags": [
+          "Aml"
+        ]
       },
       "patch": {
         "summary": "Update screening",
         "operationId": "updateScreening",
         "parameters": [
-          { "in": "path", "name": "screening_id", "type": "string", "format": "uuid", "required": true },
-          { "in": "body", "name": "body", "required": true, "schema": { "$ref": "#/definitions/ScreeningUpdate" } }
+          {
+            "in": "path",
+            "name": "screening_id",
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScreeningUpdate"
+            }
+          }
         ],
         "responses": {
-          "200": { "description": "Updated", "schema": { "$ref": "#/definitions/ScreeningOut" } },
-          "400": { "description": "Bad Request" },
-          "404": { "description": "Not Found" }
-        }
+          "200": {
+            "description": "Updated",
+            "schema": {
+              "$ref": "#/definitions/ScreeningOut"
+            },
+            "examples": {
+              "application/json": {}
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "tags": [
+          "Aml"
+        ]
       },
       "delete": {
         "summary": "Delete screening",
         "operationId": "deleteScreening",
         "parameters": [
-          { "in": "path", "name": "screening_id", "type": "string", "format": "uuid", "required": true }
+          {
+            "in": "path",
+            "name": "screening_id",
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          }
         ],
         "responses": {
-          "204": { "description": "Deleted" },
-          "404": { "description": "Not Found" }
-        }
+          "204": {
+            "description": "Deleted"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "tags": [
+          "Aml"
+        ]
       }
     },
-
     "/aml/screenings/by-national-id/{national_id}": {
       "get": {
         "summary": "Get screening by National ID (latest)",
         "operationId": "getScreeningByNationalId",
         "parameters": [
-          { "in": "path", "name": "national_id", "type": "string", "required": true }
+          {
+            "in": "path",
+            "name": "national_id",
+            "type": "string",
+            "required": true
+          }
         ],
         "responses": {
-          "200": { "description": "OK", "schema": { "$ref": "#/definitions/ScreeningOut" } },
-          "404": { "description": "Not Found" }
-        }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ScreeningOut"
+            },
+            "examples": {
+              "application/json": {}
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "tags": [
+          "Aml"
+        ]
       }
     }
   },
-
   "definitions": {
     "HealthResponse": {
       "type": "object",
       "properties": {
-        "ok": { "type": "boolean" }
+        "ok": {
+          "type": "boolean"
+        }
       }
     },
-
     "CreateCIFResponse": {
       "type": "object",
       "properties": {
-        "CIF": { "type": "integer", "format": "int64" }
+        "CIF": {
+          "type": "integer",
+          "format": "int64"
+        }
       },
-      "required": ["CIF"]
+      "required": [
+        "CIF"
+      ]
     },
-
     "CreateAccountResponse": {
       "type": "object",
       "properties": {
-        "AccountNumber": { "type": "string" }
+        "AccountNumber": {
+          "type": "string"
+        }
       },
-      "required": ["AccountNumber"]
+      "required": [
+        "AccountNumber"
+      ]
     },
-
     "CustomerCreate": {
       "type": "object",
       "properties": {
-        "NationalID": { "type": "string", "minLength": 14, "maxLength": 14 },
-        "PassportNo": { "type": "string" },
-        "NameAr": { "type": "string", "minLength": 1, "maxLength": 200 },
-        "NameEn": { "type": "string" },
-        "DOB": { "type": "string", "format": "date" },
-        "Gender": { "type": "string", "enum": ["M", "F"] },
-        "Address": { "type": "string" },
-        "Mobile": { "type": "string", "minLength": 4, "maxLength": 20 },
-        "Email": { "type": "string", "format": "email" },
-        "BranchCode": { "type": "string", "minLength": 1, "maxLength": 10 }
+        "NationalID": {
+          "type": "string",
+          "minLength": 14,
+          "maxLength": 14
+        },
+        "PassportNo": {
+          "type": "string"
+        },
+        "NameAr": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "NameEn": {
+          "type": "string"
+        },
+        "DOB": {
+          "type": "string",
+          "format": "date"
+        },
+        "Gender": {
+          "type": "string",
+          "enum": [
+            "M",
+            "F"
+          ]
+        },
+        "Address": {
+          "type": "string"
+        },
+        "Mobile": {
+          "type": "string",
+          "minLength": 4,
+          "maxLength": 20
+        },
+        "Email": {
+          "type": "string",
+          "format": "email"
+        },
+        "BranchCode": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 10
+        }
       },
-      "required": ["NameAr", "DOB", "Gender", "Mobile", "BranchCode"]
+      "required": [
+        "NameAr",
+        "DOB",
+        "Gender",
+        "Mobile",
+        "BranchCode"
+      ]
     },
-
     "CustomerUpdate": {
       "type": "object",
       "properties": {
-        "NationalID": { "type": "string", "minLength": 14, "maxLength": 14 },
-        "PassportNo": { "type": "string" },
-        "NameAr": { "type": "string" },
-        "NameEn": { "type": "string" },
-        "DOB": { "type": "string", "format": "date" },
-        "Gender": { "type": "string", "enum": ["M", "F"] },
-        "Address": { "type": "string" },
-        "Mobile": { "type": "string" },
-        "Email": { "type": "string", "format": "email" },
-        "BranchCode": { "type": "string" }
+        "NationalID": {
+          "type": "string",
+          "minLength": 14,
+          "maxLength": 14
+        },
+        "PassportNo": {
+          "type": "string"
+        },
+        "NameAr": {
+          "type": "string"
+        },
+        "NameEn": {
+          "type": "string"
+        },
+        "DOB": {
+          "type": "string",
+          "format": "date"
+        },
+        "Gender": {
+          "type": "string",
+          "enum": [
+            "M",
+            "F"
+          ]
+        },
+        "Address": {
+          "type": "string"
+        },
+        "Mobile": {
+          "type": "string"
+        },
+        "Email": {
+          "type": "string",
+          "format": "email"
+        },
+        "BranchCode": {
+          "type": "string"
+        }
       }
     },
-
     "CustomerOut": {
       "allOf": [
-        { "$ref": "#/definitions/CustomerCreate" },
+        {
+          "$ref": "#/definitions/CustomerCreate"
+        },
         {
           "type": "object",
           "properties": {
-            "CIF": { "type": "integer", "format": "int64" },
-            "CreatedAt": { "type": "string", "format": "date-time" }
+            "CIF": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "CreatedAt": {
+              "type": "string",
+              "format": "date-time"
+            }
           },
-          "required": ["CIF", "CreatedAt"]
+          "required": [
+            "CIF",
+            "CreatedAt"
+          ]
         }
       ]
     },
-
     "AccountCreateLocked": {
       "type": "object",
       "properties": {
-        "AccountNumber": { "type": "string", "minLength": 1, "maxLength": 20 },
-        "CIF": { "type": "integer", "format": "int64" },
-        "AccountType": { "type": "string", "minLength": 1, "maxLength": 30 },
-        "Currency": { "type": "string", "minLength": 3, "maxLength": 3 },
-        "ProductCode": { "type": "string" }
+        "AccountNumber": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 20
+        },
+        "CIF": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "AccountType": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 30
+        },
+        "Currency": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 3
+        },
+        "ProductCode": {
+          "type": "string"
+        }
       },
-      "required": ["AccountNumber", "CIF", "AccountType", "Currency"]
+      "required": [
+        "AccountNumber",
+        "CIF",
+        "AccountType",
+        "Currency"
+      ]
     },
-
     "AccountCreate": {
       "type": "object",
       "properties": {
-        "AccountNumber": { "type": "string", "minLength": 1, "maxLength": 20 },
-        "CIF": { "type": "integer", "format": "int64" },
-        "AccountType": { "type": "string", "minLength": 1, "maxLength": 30 },
-        "Currency": { "type": "string", "minLength": 3, "maxLength": 3 },
-        "DebitBlocked": { "type": "boolean", "default": false },
-        "ProductCode": { "type": "string" }
+        "AccountNumber": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 20
+        },
+        "CIF": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "AccountType": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 30
+        },
+        "Currency": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 3
+        },
+        "DebitBlocked": {
+          "type": "boolean",
+          "default": false
+        },
+        "ProductCode": {
+          "type": "string"
+        }
       },
-      "required": ["AccountNumber", "CIF", "AccountType", "Currency"]
+      "required": [
+        "AccountNumber",
+        "CIF",
+        "AccountType",
+        "Currency"
+      ]
     },
-
     "AccountUpdate": {
       "type": "object",
       "properties": {
-        "AccountType": { "type": "string" },
-        "Currency": { "type": "string", "minLength": 3, "maxLength": 3 },
-        "DebitBlocked": { "type": "boolean" },
-        "ProductCode": { "type": "string" }
+        "AccountType": {
+          "type": "string"
+        },
+        "Currency": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 3
+        },
+        "DebitBlocked": {
+          "type": "boolean"
+        },
+        "ProductCode": {
+          "type": "string"
+        }
       }
     },
-
     "AccountOut": {
       "allOf": [
-        { "$ref": "#/definitions/AccountCreate" },
+        {
+          "$ref": "#/definitions/AccountCreate"
+        },
         {
           "type": "object",
           "properties": {
-            "CreatedAt": { "type": "string", "format": "date-time" }
+            "CreatedAt": {
+              "type": "string",
+              "format": "date-time"
+            }
           },
-          "required": ["CreatedAt"]
+          "required": [
+            "CreatedAt"
+          ]
         }
       ]
     },
-
     "FolderCreate": {
       "type": "object",
       "properties": {
-        "CIF": { "type": "integer", "format": "int64" },
-        "RequestId": { "type": "string", "minLength": 1, "maxLength": 50 },
-        "PathHint": { "type": "string", "maxLength": 500 }
+        "CIF": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "RequestId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "PathHint": {
+          "type": "string",
+          "maxLength": 500
+        }
       },
-      "required": ["CIF", "RequestId"]
+      "required": [
+        "CIF",
+        "RequestId"
+      ]
     },
-
     "FolderUpdate": {
       "type": "object",
       "properties": {
-        "PathHint": { "type": "string", "maxLength": 500 }
+        "PathHint": {
+          "type": "string",
+          "maxLength": 500
+        }
       }
     },
-
     "FolderOut": {
       "allOf": [
-        { "$ref": "#/definitions/FolderCreate" },
+        {
+          "$ref": "#/definitions/FolderCreate"
+        },
         {
           "type": "object",
           "properties": {
-            "FolderId": { "type": "string", "format": "uuid" },
-            "CreatedAt": { "type": "string", "format": "date-time" }
+            "FolderId": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "CreatedAt": {
+              "type": "string",
+              "format": "date-time"
+            }
           },
-          "required": ["FolderId", "CreatedAt"]
+          "required": [
+            "FolderId",
+            "CreatedAt"
+          ]
         }
       ]
     },
-
     "DocumentCreate": {
       "type": "object",
       "properties": {
-        "FolderId": { "type": "string", "format": "uuid" },
-        "RequestId": { "type": "string", "minLength": 1, "maxLength": 50 },
-        "DocType": { "type": "string", "minLength": 1, "maxLength": 50 },
-        "FileName": { "type": "string", "minLength": 1, "maxLength": 255 }
+        "FolderId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "RequestId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "DocType": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "FileName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255
+        }
       },
-      "required": ["FolderId", "RequestId", "DocType", "FileName"]
+      "required": [
+        "FolderId",
+        "RequestId",
+        "DocType",
+        "FileName"
+      ]
     },
-
     "DocumentUpdate": {
       "type": "object",
       "properties": {
-        "DocType": { "type": "string" },
-        "FileName": { "type": "string" }
+        "DocType": {
+          "type": "string"
+        },
+        "FileName": {
+          "type": "string"
+        }
       }
     },
-
     "DocumentOut": {
       "allOf": [
-        { "$ref": "#/definitions/DocumentCreate" },
+        {
+          "$ref": "#/definitions/DocumentCreate"
+        },
         {
           "type": "object",
           "properties": {
-            "DocumentId": { "type": "string", "format": "uuid" },
-            "UploadedAt": { "type": "string", "format": "date-time" }
+            "DocumentId": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "UploadedAt": {
+              "type": "string",
+              "format": "date-time"
+            }
           },
-          "required": ["DocumentId", "UploadedAt"]
+          "required": [
+            "DocumentId",
+            "UploadedAt"
+          ]
         }
       ]
     },
-
     "ScreeningCreate": {
       "type": "object",
       "properties": {
-        "NationalID": { "type": "string", "minLength": 14, "maxLength": 14 },
-        "PassportNo": { "type": "string" },
-        "NameAr": { "type": "string" },
-        "NameEn": { "type": "string" },
-        "RiskScore": { "type": "integer", "format": "int32" },
-        "RiskLevel": { "type": "string", "enum": ["LOW", "MEDIUM", "HIGH"] },
-        "HitsCount": { "type": "integer", "format": "int32", "default": 0 }
+        "NationalID": {
+          "type": "string",
+          "minLength": 14,
+          "maxLength": 14
+        },
+        "PassportNo": {
+          "type": "string"
+        },
+        "NameAr": {
+          "type": "string"
+        },
+        "NameEn": {
+          "type": "string"
+        },
+        "RiskScore": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "RiskLevel": {
+          "type": "string",
+          "enum": [
+            "LOW",
+            "MEDIUM",
+            "HIGH"
+          ]
+        },
+        "HitsCount": {
+          "type": "integer",
+          "format": "int32",
+          "default": 0
+        }
       },
-      "required": ["RiskScore", "RiskLevel"]
+      "required": [
+        "RiskScore",
+        "RiskLevel"
+      ]
     },
-
     "ScreeningUpdate": {
       "type": "object",
       "properties": {
-        "NationalID": { "type": "string", "minLength": 14, "maxLength": 14 },
-        "PassportNo": { "type": "string" },
-        "NameAr": { "type": "string" },
-        "NameEn": { "type": "string" },
-        "RiskScore": { "type": "integer", "format": "int32" },
-        "RiskLevel": { "type": "string", "enum": ["LOW", "MEDIUM", "HIGH"] },
-        "HitsCount": { "type": "integer", "format": "int32" }
+        "NationalID": {
+          "type": "string",
+          "minLength": 14,
+          "maxLength": 14
+        },
+        "PassportNo": {
+          "type": "string"
+        },
+        "NameAr": {
+          "type": "string"
+        },
+        "NameEn": {
+          "type": "string"
+        },
+        "RiskScore": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "RiskLevel": {
+          "type": "string",
+          "enum": [
+            "LOW",
+            "MEDIUM",
+            "HIGH"
+          ]
+        },
+        "HitsCount": {
+          "type": "integer",
+          "format": "int32"
+        }
       }
     },
-
     "ScreeningOut": {
       "allOf": [
-        { "$ref": "#/definitions/ScreeningCreate" },
+        {
+          "$ref": "#/definitions/ScreeningCreate"
+        },
         {
           "type": "object",
           "properties": {
-            "ScreeningId": { "type": "string", "format": "uuid" },
-            "PerformedAt": { "type": "string", "format": "date-time" }
+            "ScreeningId": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "PerformedAt": {
+              "type": "string",
+              "format": "date-time"
+            }
           },
-          "required": ["ScreeningId", "PerformedAt"]
+          "required": [
+            "ScreeningId",
+            "PerformedAt"
+          ]
         }
       ]
+    },
+    "Error": {
+      "type": "object",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "example": 400
+        },
+        "message": {
+          "type": "string",
+          "example": "Invalid request"
+        },
+        "details": {
+          "type": "string",
+          "example": "Field 'name' is required."
+        }
+      }
     }
-  }
+  },
+  "tags": [
+    {
+      "name": "Health",
+      "description": "Operations related to Health."
+    },
+    {
+      "name": "Core",
+      "description": "Operations related to Core."
+    },
+    {
+      "name": "Ecm",
+      "description": "Operations related to Ecm."
+    },
+    {
+      "name": "Aml",
+      "description": "Operations related to Aml."
+    }
+  ]
 }
