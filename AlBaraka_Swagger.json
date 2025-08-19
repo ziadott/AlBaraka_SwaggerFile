@@ -65,26 +65,27 @@
     },
 
     "/accounts/createAccount": {
-      "post": {
-        "tags": ["Accounts"],
-        "x-k2-entityName": "Accounts",
-        "operationId": "CreateAccount",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": { "$ref": "#/definitions/AccountIn" }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Account created",
-            "schema": { "$ref": "#/definitions/AccountOut" }
-          }
-        }
+  "post": {
+    "tags": ["Accounts"],
+    "x-k2-entityName": "Accounts",
+    "operationId": "CreateAccount",
+    "parameters": [
+      {
+        "in": "body",
+        "name": "body",
+        "required": true,
+        "schema": { "$ref": "#/definitions/AccountCreateLocked" }
       }
-    },
+    ],
+    "responses": {
+      "201": {
+        "description": "Account created",
+        "schema": { "$ref": "#/definitions/AccountOut" }
+      },
+      "400": { "description": "Bad Request" }
+    }
+  }
+},
     "/accounts/{accountNo}": {
       "get": {
         "tags": ["Accounts"],
@@ -325,22 +326,30 @@
         "NameEn": { "type": "string" }
       }
     },
-    "AccountIn": {
-      "type": "object",
-      "properties": {
-        "CIF": { "type": "string" },
-        "AccountType": { "type": "string" },
-        "Currency": { "type": "string" }
-      },
-      "required": ["CIF", "AccountType", "Currency"]
-    },
-    "AccountOut": {
-      "type": "object",
-      "properties": {
-        "AccountNumber": { "type": "string" },
-        "CIF": { "type": "string" }
-      }
-    },
+    "AccountCreateLocked": {
+  "type": "object",
+  "required": ["AccountNumber", "CIF", "AccountType", "Currency"],
+  "properties": {
+    "AccountNumber": { "type": "string", "maxLength": 20 },
+    "CIF": { "type": "integer", "format": "int64" },
+    "AccountType": { "type": "string", "maxLength": 30 },
+    "Currency": { "type": "string", "minLength": 3, "maxLength": 3 },
+    "ProductCode": { "type": "string" }
+  },
+  "additionalProperties": false
+},
+"AccountOut": {
+  "type": "object",
+  "properties": {
+    "AccountNumber": { "type": "string" },
+    "CIF": { "type": "integer", "format": "int64" },
+    "AccountType": { "type": "string" },
+    "Currency": { "type": "string" },
+    "DebitBlocked": { "type": "boolean" },
+    "ProductCode": { "type": "string" },
+    "CreatedAt": { "type": "string", "format": "date-time" }
+  }
+},
     "FolderIn": {
       "type": "object",
       "properties": {
