@@ -4,6 +4,7 @@
     "title": "AlBaraka EXT Python API",
     "version": "1.0.0"
   },
+  "host": "core-ecm-aml-api.onrender.com",
   "basePath": "/core",
   "schemes": ["https"],
   "consumes": ["application/json"],
