@@ -5,182 +5,114 @@
     "version": "1.0.0"
   },
   "host": "core-ecm-aml-api.onrender.com",
-  "basePath": "/core",
+  "basePath": "/",
   "schemes": ["https"],
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "paths": {
-    "/customers": {
+    "/core/customers/createCIF": {
       "post": {
         "tags": ["Customers"],
         "x-k2-entityName": "Customers",
-        "operationId": "CreateCustomer",
-        "summary": "Create a customer and return full record",
+        "operationId": "CreateCIF",
         "parameters": [
           {
             "in": "body",
             "name": "body",
             "required": true,
-            "schema": { "$ref": "#/definitions/CustomerCreate" }
+            "schema": { "$ref": "#/definitions/CustomerIn" }
           }
         ],
         "responses": {
-          "201": { "description": "Created", "schema": { "$ref": "#/definitions/CustomerOut" } },
-          "400": { "description": "Bad Request" }
-        }
-      },
-      "get": {
-        "tags": ["Customers"],
-        "x-k2-entityName": "Customers",
-        "operationId": "ListCustomers",
-        "summary": "List customers (optional branch filter)",
-        "parameters": [
-          { "name": "branch", "in": "query", "required": false, "type": "string" },
-          { "name": "limit", "in": "query", "required": false, "type": "integer", "format": "int32" }
-        ],
-        "responses": {
-          "200": {
-            "description": "List of customers",
-            "schema": { "type": "array", "items": { "$ref": "#/definitions/CustomerOut" } }
+          "201": {
+            "description": "CIF created successfully",
+            "schema": { "$ref": "#/definitions/CustomerOut" }
           }
         }
       }
     },
-
-    "/customers/{cif}": {
+    "/core/customers/{cif}": {
       "get": {
         "tags": ["Customers"],
         "x-k2-entityName": "Customers",
         "operationId": "GetCustomerByCIF",
         "parameters": [
-          { "name": "cif", "in": "path", "required": true, "type": "integer", "format": "int64" }
+          { "name": "cif", "in": "path", "required": true, "type": "string" }
         ],
         "responses": {
-          "200": { "description": "Customer", "schema": { "$ref": "#/definitions/CustomerOut" } },
-          "404": { "description": "Not Found" }
+          "200": {
+            "description": "Customer details",
+            "schema": { "$ref": "#/definitions/CustomerOut" }
+          }
         }
-      },
-      "patch": {
-        "tags": ["Customers"],
-        "x-k2-entityName": "Customers",
-        "operationId": "UpdateCustomer",
-        "parameters": [
-          { "name": "cif", "in": "path", "required": true, "type": "integer", "format": "int64" },
-          { "in": "body", "name": "body", "required": true, "schema": { "$ref": "#/definitions/CustomerUpdate" } }
-        ],
-        "responses": {
-          "200": { "description": "Updated", "schema": { "$ref": "#/definitions/CustomerOut" } },
-          "404": { "description": "Not Found" }
-        }
-      },
-      "delete": {
-        "tags": ["Customers"],
-        "x-k2-entityName": "Customers",
-        "operationId": "DeleteCustomer",
-        "parameters": [
-          { "name": "cif", "in": "path", "required": true, "type": "integer", "format": "int64" }
-        ],
-        "responses": { "204": { "description": "Deleted" }, "404": { "description": "Not Found" } }
       }
     },
-
-    "/customers/by-national-id/{national_id}": {
+    "/core/customers/list": {
       "get": {
         "tags": ["Customers"],
         "x-k2-entityName": "Customers",
-        "operationId": "GetCustomerByNationalID",
-        "parameters": [
-          { "name": "national_id", "in": "path", "required": true, "type": "string" }
-        ],
+        "operationId": "ListCustomers",
         "responses": {
-          "200": { "description": "Customer", "schema": { "$ref": "#/definitions/CustomerOut" } },
-          "404": { "description": "Not Found" }
+          "200": {
+            "description": "List of customers",
+            "schema": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/CustomerOut" }
+            }
+          }
         }
       }
     },
 
-    "/customers/createCIF": {
-      "post": {
-        "tags": ["Customers"],
-        "x-k2-entityName": "Customers",
-        "operationId": "CreateCIF",
-        "summary": "Create a CIF and return only the CIF value",
-        "parameters": [
-          { "in": "body", "name": "body", "required": true, "schema": { "$ref": "#/definitions/CustomerCreate" } }
-        ],
-        "responses": {
-          "201": { "description": "Created", "schema": { "$ref": "#/definitions/CIFOut" } },
-          "400": { "description": "Bad Request" }
-        }
-      }
-    },
-
-    "/accounts/createAccount": {
+    "/core/accounts/createAccount": {
       "post": {
         "tags": ["Accounts"],
         "x-k2-entityName": "Accounts",
-        "operationId": "CreateAccountLocked",
-        "summary": "Create an account (DebitBlocked forced TRUE) and return only AccountNumber",
+        "operationId": "CreateAccount",
         "parameters": [
-          { "in": "body", "name": "body", "required": true, "schema": { "$ref": "#/definitions/AccountCreateLocked" } }
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/AccountIn" }
+          }
         ],
         "responses": {
-          "201": { "description": "Created", "schema": { "$ref": "#/definitions/AccountNumberOut" } },
-          "400": { "description": "Bad Request" }
+          "201": {
+            "description": "Account created",
+            "schema": { "$ref": "#/definitions/AccountOut" }
+          }
         }
       }
     },
-
-    "/accounts/{account_number}": {
+    "/core/accounts/{accountNo}": {
       "get": {
         "tags": ["Accounts"],
         "x-k2-entityName": "Accounts",
-        "operationId": "GetAccount",
+        "operationId": "GetAccountByNumber",
         "parameters": [
-          { "name": "account_number", "in": "path", "required": true, "type": "string" }
+          { "name": "accountNo", "in": "path", "required": true, "type": "string" }
         ],
         "responses": {
-          "200": { "description": "Account", "schema": { "$ref": "#/definitions/AccountOut" } },
-          "404": { "description": "Not Found" }
+          "200": {
+            "description": "Account details",
+            "schema": { "$ref": "#/definitions/AccountOut" }
+          }
         }
-      },
-      "patch": {
-        "tags": ["Accounts"],
-        "x-k2-entityName": "Accounts",
-        "operationId": "UpdateAccount",
-        "parameters": [
-          { "name": "account_number", "in": "path", "required": true, "type": "string" },
-          { "in": "body", "name": "body", "required": true, "schema": { "$ref": "#/definitions/AccountUpdate" } }
-        ],
-        "responses": {
-          "200": { "description": "Updated", "schema": { "$ref": "#/definitions/AccountOut" } },
-          "404": { "description": "Not Found" }
-        }
-      },
-      "delete": {
-        "tags": ["Accounts"],
-        "x-k2-entityName": "Accounts",
-        "operationId": "DeleteAccount",
-        "parameters": [
-          { "name": "account_number", "in": "path", "required": true, "type": "string" }
-        ],
-        "responses": { "204": { "description": "Deleted" }, "404": { "description": "Not Found" } }
       }
     },
-
-    "/accounts": {
+    "/core/accounts/list": {
       "get": {
         "tags": ["Accounts"],
         "x-k2-entityName": "Accounts",
         "operationId": "ListAccounts",
-        "parameters": [
-          { "name": "cif", "in": "query", "required": false, "type": "integer", "format": "int64" },
-          { "name": "limit", "in": "query", "required": false, "type": "integer", "format": "int32" }
-        ],
         "responses": {
           "200": {
             "description": "List of accounts",
-            "schema": { "type": "array", "items": { "$ref": "#/definitions/AccountOut" } }
+            "schema": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/AccountOut" }
+            }
           }
         }
       }
@@ -192,76 +124,50 @@
         "x-k2-entityName": "Folders",
         "operationId": "CreateFolder",
         "parameters": [
-          { "in": "body", "name": "body", "required": true, "schema": { "$ref": "#/definitions/FolderCreate" } }
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/FolderIn" }
+          }
         ],
         "responses": {
-          "201": { "description": "Created", "schema": { "$ref": "#/definitions/FolderOut" } },
-          "400": { "description": "Bad Request" }
+          "201": {
+            "description": "Folder created",
+            "schema": { "$ref": "#/definitions/FolderOut" }
+          }
         }
-      },
+      }
+    },
+    "/ecm/folders/{folderId}": {
+      "get": {
+        "tags": ["Folders"],
+        "x-k2-entityName": "Folders",
+        "operationId": "GetFolderById",
+        "parameters": [
+          { "name": "folderId", "in": "path", "required": true, "type": "string" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Folder details",
+            "schema": { "$ref": "#/definitions/FolderOut" }
+          }
+        }
+      }
+    },
+    "/ecm/folders/list": {
       "get": {
         "tags": ["Folders"],
         "x-k2-entityName": "Folders",
         "operationId": "ListFolders",
-        "parameters": [
-          { "name": "cif", "in": "query", "required": false, "type": "integer", "format": "int64" },
-          { "name": "request_id", "in": "query", "required": false, "type": "string" },
-          { "name": "limit", "in": "query", "required": false, "type": "integer", "format": "int32" }
-        ],
         "responses": {
-          "200": { "description": "List of folders", "schema": { "type": "array", "items": { "$ref": "#/definitions/FolderOut" } } }
-        }
-      }
-    },
-
-    "/ecm/folders/{folder_id}": {
-      "get": {
-        "tags": ["Folders"],
-        "x-k2-entityName": "Folders",
-        "operationId": "GetFolder",
-        "parameters": [
-          { "name": "folder_id", "in": "path", "required": true, "type": "string" }
-        ],
-        "responses": {
-          "200": { "description": "Folder", "schema": { "$ref": "#/definitions/FolderOut" } },
-          "404": { "description": "Not Found" }
-        }
-      },
-      "patch": {
-        "tags": ["Folders"],
-        "x-k2-entityName": "Folders",
-        "operationId": "UpdateFolder",
-        "parameters": [
-          { "name": "folder_id", "in": "path", "required": true, "type": "string" },
-          { "in": "body", "name": "body", "required": true, "schema": { "$ref": "#/definitions/FolderUpdate" } }
-        ],
-        "responses": {
-          "200": { "description": "Updated", "schema": { "$ref": "#/definitions/FolderOut" } },
-          "404": { "description": "Not Found" }
-        }
-      },
-      "delete": {
-        "tags": ["Folders"],
-        "x-k2-entityName": "Folders",
-        "operationId": "DeleteFolder",
-        "parameters": [
-          { "name": "folder_id", "in": "path", "required": true, "type": "string" }
-        ],
-        "responses": { "204": { "description": "Deleted" }, "404": { "description": "Not Found" } }
-      }
-    },
-
-    "/ecm/folders/by-cif/{cif}": {
-      "get": {
-        "tags": ["Folders"],
-        "x-k2-entityName": "Folders",
-        "operationId": "GetFolderByCIF",
-        "parameters": [
-          { "name": "cif", "in": "path", "required": true, "type": "integer", "format": "int64" }
-        ],
-        "responses": {
-          "200": { "description": "Latest folder", "schema": { "$ref": "#/definitions/FolderOut" } },
-          "404": { "description": "Not Found" }
+          "200": {
+            "description": "List of folders",
+            "schema": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/FolderOut" }
+            }
+          }
         }
       }
     },
@@ -270,80 +176,58 @@
       "post": {
         "tags": ["Documents"],
         "x-k2-entityName": "Documents",
-        "operationId": "CreateDocument",
+        "operationId": "UploadDocument",
         "parameters": [
-          { "in": "body", "name": "body", "required": true, "schema": { "$ref": "#/definitions/DocumentCreate" } }
+          {
+            "in": "formData",
+            "name": "file",
+            "type": "file",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "folderId",
+            "type": "string",
+            "required": true
+          }
         ],
         "responses": {
-          "201": { "description": "Created", "schema": { "$ref": "#/definitions/DocumentOut" } },
-          "400": { "description": "Bad Request" }
+          "201": {
+            "description": "Document uploaded",
+            "schema": { "$ref": "#/definitions/DocumentOut" }
+          }
         }
-      },
+      }
+    },
+    "/ecm/documents/{docId}": {
+      "get": {
+        "tags": ["Documents"],
+        "x-k2-entityName": "Documents",
+        "operationId": "GetDocumentById",
+        "parameters": [
+          { "name": "docId", "in": "path", "required": true, "type": "string" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Document details",
+            "schema": { "$ref": "#/definitions/DocumentOut" }
+          }
+        }
+      }
+    },
+    "/ecm/documents/list": {
       "get": {
         "tags": ["Documents"],
         "x-k2-entityName": "Documents",
         "operationId": "ListDocuments",
-        "parameters": [
-          { "name": "folder_id", "in": "query", "required": false, "type": "string" },
-          { "name": "request_id", "in": "query", "required": false, "type": "string" },
-          { "name": "doc_type", "in": "query", "required": false, "type": "string" },
-          { "name": "limit", "in": "query", "required": false, "type": "integer", "format": "int32" }
-        ],
         "responses": {
-          "200": { "description": "List of documents", "schema": { "type": "array", "items": { "$ref": "#/definitions/DocumentOut" } } }
-        }
-      }
-    },
-
-    "/ecm/documents/{document_id}": {
-      "get": {
-        "tags": ["Documents"],
-        "x-k2-entityName": "Documents",
-        "operationId": "GetDocument",
-        "parameters": [
-          { "name": "document_id", "in": "path", "required": true, "type": "string" }
-        ],
-        "responses": {
-          "200": { "description": "Document", "schema": { "$ref": "#/definitions/DocumentOut" } },
-          "404": { "description": "Not Found" }
-        }
-      },
-      "patch": {
-        "tags": ["Documents"],
-        "x-k2-entityName": "Documents",
-        "operationId": "UpdateDocument",
-        "parameters": [
-          { "name": "document_id", "in": "path", "required": true, "type": "string" },
-          { "in": "body", "name": "body", "required": true, "schema": { "$ref": "#/definitions/DocumentUpdate" } }
-        ],
-        "responses": {
-          "200": { "description": "Updated", "schema": { "$ref": "#/definitions/DocumentOut" } },
-          "404": { "description": "Not Found" }
-        }
-      },
-      "delete": {
-        "tags": ["Documents"],
-        "x-k2-entityName": "Documents",
-        "operationId": "DeleteDocument",
-        "parameters": [
-          { "name": "document_id", "in": "path", "required": true, "type": "string" }
-        ],
-        "responses": { "204": { "description": "Deleted" }, "404": { "description": "Not Found" } }
-      }
-    },
-
-    "/ecm/documents/by-folder-request": {
-      "get": {
-        "tags": ["Documents"],
-        "x-k2-entityName": "Documents",
-        "operationId": "GetDocumentByFolderAndRequest",
-        "parameters": [
-          { "name": "folder_id", "in": "query", "required": true, "type": "string" },
-          { "name": "request_id", "in": "query", "required": true, "type": "string" }
-        ],
-        "responses": {
-          "200": { "description": "Latest document by folder & request", "schema": { "$ref": "#/definitions/DocumentOut" } },
-          "404": { "description": "Not Found" }
+          "200": {
+            "description": "List of documents",
+            "schema": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/DocumentOut" }
+            }
+          }
         }
       }
     },
@@ -354,129 +238,72 @@
         "x-k2-entityName": "Screenings",
         "operationId": "CreateScreening",
         "parameters": [
-          { "in": "body", "name": "body", "required": true, "schema": { "$ref": "#/definitions/ScreeningCreate" } }
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/ScreeningIn" }
+          }
         ],
         "responses": {
-          "201": { "description": "Created", "schema": { "$ref": "#/definitions/ScreeningOut" } },
-          "400": { "description": "Bad Request" }
+          "201": {
+            "description": "Screening created",
+            "schema": { "$ref": "#/definitions/ScreeningOut" }
+          }
         }
-      },
+      }
+    },
+    "/aml/screenings/{screeningId}": {
+      "get": {
+        "tags": ["Screenings"],
+        "x-k2-entityName": "Screenings",
+        "operationId": "GetScreeningById",
+        "parameters": [
+          { "name": "screeningId", "in": "path", "required": true, "type": "string" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Screening details",
+            "schema": { "$ref": "#/definitions/ScreeningOut" }
+          }
+        }
+      }
+    },
+    "/aml/screenings/list": {
       "get": {
         "tags": ["Screenings"],
         "x-k2-entityName": "Screenings",
         "operationId": "ListScreenings",
-        "parameters": [
-          { "name": "national_id", "in": "query", "required": false, "type": "string" },
-          { "name": "passport_no", "in": "query", "required": false, "type": "string" },
-          { "name": "risk_level", "in": "query", "required": false, "type": "string" },
-          { "name": "limit", "in": "query", "required": false, "type": "integer", "format": "int32" }
-        ],
         "responses": {
-          "200": { "description": "List of screenings", "schema": { "type": "array", "items": { "$ref": "#/definitions/ScreeningOut" } } }
+          "200": {
+            "description": "List of screenings",
+            "schema": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/ScreeningOut" }
+            }
+          }
         }
       }
     },
 
-    "/aml/screenings/{screening_id}": {
-      "get": {
-        "tags": ["Screenings"],
-        "x-k2-entityName": "Screenings",
-        "operationId": "GetScreening",
-        "parameters": [
-          { "name": "screening_id", "in": "path", "required": true, "type": "string" }
-        ],
-        "responses": {
-          "200": { "description": "Screening", "schema": { "$ref": "#/definitions/ScreeningOut" } },
-          "404": { "description": "Not Found" }
-        }
-      },
-      "patch": {
-        "tags": ["Screenings"],
-        "x-k2-entityName": "Screenings",
-        "operationId": "UpdateScreening",
-        "parameters": [
-          { "name": "screening_id", "in": "path", "required": true, "type": "string" },
-          { "in": "body", "name": "body", "required": true, "schema": { "$ref": "#/definitions/ScreeningUpdate" } }
-        ],
-        "responses": {
-          "200": { "description": "Updated", "schema": { "$ref": "#/definitions/ScreeningOut" } },
-          "404": { "description": "Not Found" }
-        }
-      },
-      "delete": {
-        "tags": ["Screenings"],
-        "x-k2-entityName": "Screenings",
-        "operationId": "DeleteScreening",
-        "parameters": [
-          { "name": "screening_id", "in": "path", "required": true, "type": "string" }
-        ],
-        "responses": { "204": { "description": "Deleted" }, "404": { "description": "Not Found" } }
-      }
-    },
-
-    "/aml/screenings/by-national-id/{national_id}": {
-      "get": {
-        "tags": ["Screenings"],
-        "x-k2-entityName": "Screenings",
-        "operationId": "GetScreeningByNationalID",
-        "parameters": [
-          { "name": "national_id", "in": "path", "required": true, "type": "string" }
-        ],
-        "responses": {
-          "200": { "description": "Latest screening by national id", "schema": { "$ref": "#/definitions/ScreeningOut" } },
-          "404": { "description": "Not Found" }
-        }
-      }
-    },
-
-    "/system/health": {
+    "/health": {
       "get": {
         "tags": ["System"],
         "x-k2-entityName": "System",
         "operationId": "GetSystemHealth",
         "responses": {
-          "200": { "description": "Health status", "schema": { "$ref": "#/definitions/HealthOut" } }
+          "200": {
+            "description": "Health status",
+            "schema": { "$ref": "#/definitions/HealthOut" }
+          }
         }
       }
     }
   },
-
   "definitions": {
-    "CustomerCreate": {
-      "type": "object",
-      "required": ["NameAr", "DOB", "Gender", "Mobile", "BranchCode"],
-      "properties": {
-        "NationalID": { "type": "string", "minLength": 14, "maxLength": 14 },
-        "PassportNo": { "type": "string" },
-        "NameAr": { "type": "string", "maxLength": 200 },
-        "NameEn": { "type": "string" },
-        "DOB": { "type": "string", "format": "date" },
-        "Gender": { "type": "string", "enum": ["M", "F"] },
-        "Address": { "type": "string" },
-        "Mobile": { "type": "string", "minLength": 4, "maxLength": 20 },
-        "Email": { "type": "string" },
-        "BranchCode": { "type": "string", "maxLength": 10 }
-      }
-    },
-    "CustomerUpdate": {
+    "CustomerIn": {
       "type": "object",
       "properties": {
-        "NationalID": { "type": "string", "minLength": 14, "maxLength": 14 },
-        "PassportNo": { "type": "string" },
-        "NameAr": { "type": "string" },
-        "NameEn": { "type": "string" },
-        "DOB": { "type": "string", "format": "date" },
-        "Gender": { "type": "string", "enum": ["M", "F"] },
-        "Address": { "type": "string" },
-        "Mobile": { "type": "string" },
-        "Email": { "type": "string" },
-        "BranchCode": { "type": "string" }
-      }
-    },
-    "CustomerOut": {
-      "type": "object",
-      "properties": {
-        "CIF": { "type": "integer", "format": "int64" },
         "NationalID": { "type": "string" },
         "PassportNo": { "type": "string" },
         "NameAr": { "type": "string" },
@@ -486,158 +313,78 @@
         "Address": { "type": "string" },
         "Mobile": { "type": "string" },
         "Email": { "type": "string" },
-        "BranchCode": { "type": "string" },
-        "CreatedAt": { "type": "string", "format": "date-time" }
-      }
+        "BranchCode": { "type": "string" }
+      },
+      "required": ["NationalID", "NameEn", "DOB", "Gender", "Mobile"]
     },
-    "CIFOut": {
-      "type": "object",
-      "required": ["CIF"],
-      "properties": {
-        "CIF": { "type": "integer", "format": "int64" }
-      }
-    },
-
-    "AccountCreateLocked": {
-  "type": "object",
-  "required": ["AccountNumber", "CIF", "AccountType", "Currency"],
-  "properties": {
-    "AccountNumber": { "type": "string", "maxLength": 20 },
-    "CIF": { "type": "string", "pattern": "^\\d+$" },
-    "AccountType": { "type": "string", "maxLength": 30 },
-    "Currency": { "type": "string", "minLength": 3, "maxLength": 3 },
-    "ProductCode": { "type": "string" }
-  }
-}
-,
-    "AccountUpdate": {
+    "CustomerOut": {
       "type": "object",
       "properties": {
+        "CIF": { "type": "string" },
+        "NationalID": { "type": "string" },
+        "NameEn": { "type": "string" }
+      }
+    },
+    "AccountIn": {
+      "type": "object",
+      "properties": {
+        "CIF": { "type": "string" },
         "AccountType": { "type": "string" },
-        "Currency": { "type": "string", "minLength": 3, "maxLength": 3 },
-        "DebitBlocked": { "type": "boolean" },
-        "ProductCode": { "type": "string" }
-      }
+        "Currency": { "type": "string" }
+      },
+      "required": ["CIF", "AccountType", "Currency"]
     },
     "AccountOut": {
       "type": "object",
       "properties": {
         "AccountNumber": { "type": "string" },
-        "CIF": { "type": "integer", "format": "int64" },
-        "AccountType": { "type": "string" },
-        "Currency": { "type": "string" },
-        "DebitBlocked": { "type": "boolean" },
-        "ProductCode": { "type": "string" },
-        "CreatedAt": { "type": "string", "format": "date-time" }
+        "CIF": { "type": "string" }
       }
     },
-    "AccountNumberOut": {
-      "type": "object",
-      "required": ["AccountNumber"],
-      "properties": {
-        "AccountNumber": { "type": "string" }
-      }
-    },
-
-    "FolderCreate": {
-      "type": "object",
-      "required": ["CIF", "RequestId"],
-      "properties": {
-        "CIF": { "type": "integer", "format": "int64" },
-        "RequestId": { "type": "string", "maxLength": 50 },
-        "PathHint": { "type": "string" }
-      }
-    },
-    "FolderUpdate": {
+    "FolderIn": {
       "type": "object",
       "properties": {
-        "PathHint": { "type": "string" }
-      }
+        "Name": { "type": "string" },
+        "ParentId": { "type": "string" }
+      },
+      "required": ["Name"]
     },
     "FolderOut": {
       "type": "object",
       "properties": {
         "FolderId": { "type": "string" },
-        "CIF": { "type": "integer", "format": "int64" },
-        "RequestId": { "type": "string" },
-        "PathHint": { "type": "string" },
-        "CreatedAt": { "type": "string", "format": "date-time" }
-      }
-    },
-
-    "DocumentCreate": {
-      "type": "object",
-      "required": ["FolderId", "RequestId", "DocType", "FileName"],
-      "properties": {
-        "FolderId": { "type": "string" },
-        "RequestId": { "type": "string", "maxLength": 50 },
-        "DocType": { "type": "string", "maxLength": 50 },
-        "FileName": { "type": "string", "maxLength": 255 }
-      }
-    },
-    "DocumentUpdate": {
-      "type": "object",
-      "properties": {
-        "DocType": { "type": "string" },
-        "FileName": { "type": "string" }
+        "Name": { "type": "string" }
       }
     },
     "DocumentOut": {
       "type": "object",
       "properties": {
         "DocumentId": { "type": "string" },
-        "FolderId": { "type": "string" },
-        "RequestId": { "type": "string" },
-        "DocType": { "type": "string" },
         "FileName": { "type": "string" },
-        "UploadedAt": { "type": "string", "format": "date-time" }
+        "FolderId": { "type": "string" }
       }
     },
-
-    "ScreeningCreate": {
-      "type": "object",
-      "required": ["RiskScore", "RiskLevel"],
-      "properties": {
-        "NationalID": { "type": "string", "minLength": 14, "maxLength": 14 },
-        "PassportNo": { "type": "string" },
-        "NameAr": { "type": "string" },
-        "NameEn": { "type": "string" },
-        "RiskScore": { "type": "integer", "format": "int32" },
-        "RiskLevel": { "type": "string", "enum": ["LOW", "MEDIUM", "HIGH"] },
-        "HitsCount": { "type": "integer", "format": "int32" }
-      }
-    },
-    "ScreeningUpdate": {
+    "ScreeningIn": {
       "type": "object",
       "properties": {
-        "NationalID": { "type": "string", "minLength": 14, "maxLength": 14 },
-        "PassportNo": { "type": "string" },
-        "NameAr": { "type": "string" },
-        "NameEn": { "type": "string" },
-        "RiskScore": { "type": "integer", "format": "int32" },
-        "RiskLevel": { "type": "string", "enum": ["LOW", "MEDIUM", "HIGH"] },
-        "HitsCount": { "type": "integer", "format": "int32" }
-      }
+        "CIF": { "type": "string" },
+        "Type": { "type": "string" }
+      },
+      "required": ["CIF", "Type"]
     },
     "ScreeningOut": {
       "type": "object",
       "properties": {
         "ScreeningId": { "type": "string" },
-        "NationalID": { "type": "string" },
-        "PassportNo": { "type": "string" },
-        "NameAr": { "type": "string" },
-        "NameEn": { "type": "string" },
-        "RiskScore": { "type": "integer", "format": "int32" },
-        "RiskLevel": { "type": "string" },
-        "HitsCount": { "type": "integer", "format": "int32" },
-        "PerformedAt": { "type": "string", "format": "date-time" }
+        "CIF": { "type": "string" },
+        "Result": { "type": "string" }
       }
     },
-
     "HealthOut": {
       "type": "object",
       "properties": {
-        "ok": { "type": "boolean" }
+        "status": { "type": "string" },
+        "uptime": { "type": "string" }
       }
     }
   }
