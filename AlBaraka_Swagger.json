@@ -172,7 +172,7 @@
       }
     },
 
-    "/documents/create": {
+    "/documents/upload": {
       "post": {
         "tags": ["Documents"],
         "x-k2-entityName": "Documents",
@@ -338,36 +338,40 @@
     "FolderIn": {
       "type": "object",
       "properties": {
-        "Name": { "type": "string" },
-        "ParentId": { "type": "string" }
+        "CIF": { "type": "string" },
+        "RequestId": { "type": "string" },
+        "PathHint": { "type": "string" }
       },
-      "required": ["Name"]
+      "required": ["CIF", "RequestId", "PathHint"]
     },
     "FolderOut": {
       "type": "object",
       "properties": {
         "FolderId": { "type": "string" },
-        "Name": { "type": "string" }
+        "CIF": { "type": "string" },
+        "RequestId": { "type": "string" },
+        "PathHint": { "type": "string" },
+        "CreatedAt": { "type": "string", "format": "date-time" }
       }
     },
     "DocumentIn": {
       "type": "object",
       "properties": {
-        "FileName": { "type": "string" },
         "FolderId": { "type": "string" },
-        "ContentBase64": {
-          "type": "string",
-          "description": "Base64 encoded file content"
-        }
+        "RequestId": { "type": "string" },
+        "DocType": { "type": "string" },
+        "FileName": { "type": "string" }
       },
-      "required": ["FileName", "FolderId", "ContentBase64"]
+      "required": ["FolderId", "RequestId", "DocType", "FileName"]
     },
     "DocumentOut": {
       "type": "object",
       "properties": {
         "DocumentId": { "type": "string" },
-        "FileName": { "type": "string" },
-        "FolderId": { "type": "string" }
+        "FolderId": { "type": "string" },
+        "RequestId": { "type": "string" },
+        "DocType": { "type": "string" },
+        "FileName": { "type": "string" }
       }
     },
     "ScreeningIn": {
