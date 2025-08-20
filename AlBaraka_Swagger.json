@@ -499,17 +499,17 @@
     },
 
     "AccountCreateLocked": {
-      "type": "object",
-      "required": ["AccountNumber", "CIF", "AccountType", "Currency"],
-      "additionalProperties": false,
-      "properties": {
-        "AccountNumber": { "type": "string", "maxLength": 20 },
-        "CIF": { "type": "integer", "format": "int64" },
-        "AccountType": { "type": "string", "maxLength": 30 },
-        "Currency": { "type": "string", "minLength": 3, "maxLength": 3 },
-        "ProductCode": { "type": "string" }
-      }
-    },
+  "type": "object",
+  "required": ["AccountNumber", "CIF", "AccountType", "Currency"],
+  "properties": {
+    "AccountNumber": { "type": "string", "maxLength": 20 },
+    "CIF": { "type": "string", "pattern": "^\\d+$" },
+    "AccountType": { "type": "string", "maxLength": 30 },
+    "Currency": { "type": "string", "minLength": 3, "maxLength": 3 },
+    "ProductCode": { "type": "string" }
+  }
+}
+,
     "AccountUpdate": {
       "type": "object",
       "properties": {
