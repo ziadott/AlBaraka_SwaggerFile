@@ -5,12 +5,12 @@
     "version": "1.0.0"
   },
   "host": "core-ecm-aml-api.onrender.com",
-  "basePath": "/",
+  "basePath": "/core",
   "schemes": ["https"],
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "paths": {
-    "/core/customers/createCIF": {
+    "/customers/createCIF": {
       "post": {
         "tags": ["Customers"],
         "x-k2-entityName": "Customers",
@@ -31,7 +31,7 @@
         }
       }
     },
-    "/core/customers/{cif}": {
+    "/customers/{cif}": {
       "get": {
         "tags": ["Customers"],
         "x-k2-entityName": "Customers",
@@ -47,7 +47,7 @@
         }
       }
     },
-    "/core/customers/list": {
+    "/customers/list": {
       "get": {
         "tags": ["Customers"],
         "x-k2-entityName": "Customers",
@@ -64,7 +64,7 @@
       }
     },
 
-    "/core/accounts/createAccount": {
+    "/accounts/createAccount": {
       "post": {
         "tags": ["Accounts"],
         "x-k2-entityName": "Accounts",
@@ -85,7 +85,7 @@
         }
       }
     },
-    "/core/accounts/{accountNo}": {
+    "/accounts/{accountNo}": {
       "get": {
         "tags": ["Accounts"],
         "x-k2-entityName": "Accounts",
@@ -101,7 +101,7 @@
         }
       }
     },
-    "/core/accounts/list": {
+    "/accounts/list": {
       "get": {
         "tags": ["Accounts"],
         "x-k2-entityName": "Accounts",
@@ -118,7 +118,7 @@
       }
     },
 
-    "/ecm/folders": {
+    "/folders/createFolder": {
       "post": {
         "tags": ["Folders"],
         "x-k2-entityName": "Folders",
@@ -139,7 +139,7 @@
         }
       }
     },
-    "/ecm/folders/{folderId}": {
+    "/folders/{folderId}": {
       "get": {
         "tags": ["Folders"],
         "x-k2-entityName": "Folders",
@@ -155,7 +155,7 @@
         }
       }
     },
-    "/ecm/folders/list": {
+    "/folders/list": {
       "get": {
         "tags": ["Folders"],
         "x-k2-entityName": "Folders",
@@ -172,23 +172,17 @@
       }
     },
 
-    "/ecm/documents": {
+    "/documents/create": {
       "post": {
         "tags": ["Documents"],
         "x-k2-entityName": "Documents",
         "operationId": "UploadDocument",
         "parameters": [
           {
-            "in": "formData",
-            "name": "file",
-            "type": "file",
-            "required": true
-          },
-          {
-            "in": "formData",
-            "name": "folderId",
-            "type": "string",
-            "required": true
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/DocumentIn" }
           }
         ],
         "responses": {
@@ -199,7 +193,7 @@
         }
       }
     },
-    "/ecm/documents/{docId}": {
+    "/documents/{docId}": {
       "get": {
         "tags": ["Documents"],
         "x-k2-entityName": "Documents",
@@ -215,7 +209,7 @@
         }
       }
     },
-    "/ecm/documents/list": {
+    "/documents/list": {
       "get": {
         "tags": ["Documents"],
         "x-k2-entityName": "Documents",
@@ -232,7 +226,7 @@
       }
     },
 
-    "/aml/screenings": {
+    "/screenings/create": {
       "post": {
         "tags": ["Screenings"],
         "x-k2-entityName": "Screenings",
@@ -253,7 +247,7 @@
         }
       }
     },
-    "/aml/screenings/{screeningId}": {
+    "/screenings/{screeningId}": {
       "get": {
         "tags": ["Screenings"],
         "x-k2-entityName": "Screenings",
@@ -269,7 +263,7 @@
         }
       }
     },
-    "/aml/screenings/list": {
+    "/screenings/list": {
       "get": {
         "tags": ["Screenings"],
         "x-k2-entityName": "Screenings",
@@ -286,7 +280,7 @@
       }
     },
 
-    "/health": {
+    "/system/health": {
       "get": {
         "tags": ["System"],
         "x-k2-entityName": "System",
@@ -355,6 +349,18 @@
         "FolderId": { "type": "string" },
         "Name": { "type": "string" }
       }
+    },
+    "DocumentIn": {
+      "type": "object",
+      "properties": {
+        "FileName": { "type": "string" },
+        "FolderId": { "type": "string" },
+        "ContentBase64": {
+          "type": "string",
+          "description": "Base64 encoded file content"
+        }
+      },
+      "required": ["FileName", "FolderId", "ContentBase64"]
     },
     "DocumentOut": {
       "type": "object",
